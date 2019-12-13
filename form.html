@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Weight Tracker</title>
+  <style>
+    body {
+      background: #f7faf7;
+    }
+
+    .container {
+      width: 50%;
+      margin: 0 auto;
+    }
+
+    form {
+      background-color: #dce0dc;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      text-align: center;
+      color: rgb(73, 167, 139);
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      text-transform: uppercase;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    ul li {
+      padding: 5px;
+      background: #f4f4f4;
+      margin: 5px 0;
+    }
+
+    .error {
+      background: orangered no-repeat;
+      color: #f7faf7;
+      padding: 5px;
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Weight Tracker App</h1>
+    <div class="wrapper">
+      <form id="form">
+
+        <div id="mgs"></div>
+
+        <label for="userNameInput">Name:</label>
+        <input type="text" class="formControl" id="userNameInput" required>
+
+        <label for="userHeightInput">Height:</label>
+        <input type="number" class="formControl" id="userHeightInput" required>
+
+        <label for="userWeightInput">Weight:</label>
+        <input type="number" class="formControl" id="userWeightInput" required>
+
+
+        <button id="btn">Add</button>
+
+      </form>
+      <ul id="user"></ul>
+    </div>
+  </div>
+  <script>
+    const myform = document.querySelector('#form');
+    const nameInput = document.querySelector('#userNameInput');
+    const heightInput = document.querySelector('#userHeightInput');
+    const weightInput = document.querySelector('#userWeightInput');
+    const mgs = document.querySelector('#mgs');
+    const userList = document.querySelector('#user');
+
+    myform.addEventListener('submit', onSubmit);
+
+    function onSubmit(e) {
+      e.preventDefault();
+
+      if (nameInput.value === '' || heightInput.value === '' || weightInput.value === '') {
+        mgs.classList.add('error');
+        mgs.innerHTML = 'Please enter all fields';
+
+        setTimeout(() => mgs.remove(), 3000);
+      } else {
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(`${nameInput.value} your weight is ${weightInput.value}KG`));
+        userList.appendChild(li);
+
+
+        nameInput.value = '';
+        heightInput.value = '';
+        weightInput.value = '';
+      };
+    }
+  </script>
+
+</body>
+
+</html>
